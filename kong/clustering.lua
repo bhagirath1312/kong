@@ -84,8 +84,7 @@ local function update_config(config_table, update_cache)
   end
 
   if declarative.get_current_hash() == new_hash then
-    ngx_log(ngx_DEBUG, "same config received from control plane,",
-            "no need to reload")
+    ngx_log(ngx_DEBUG, "same config received from control plane,","no need to reload")
     return true
   end
 
@@ -162,7 +161,9 @@ local function communicate(premature, conf)
   if conf.cluster_mtls == "shared" then
     opts.server_name = "kong_clustering"
   else
+
     -- server_name will be set to the host if it is not explicitly defined here
+
     if conf.cluster_server_name ~= "" then
       opts.server_name = conf.cluster_server_name
     end
@@ -335,8 +336,7 @@ local function validate_shared_cert()
   local cert = ngx_var.ssl_client_raw_cert
 
   if not cert then
-    ngx_log(ngx_ERR, "Data Plane failed to present client certificate " ..
-                     "during handshake")
+    ngx_log(ngx_ERR, "Data Plane failed to present client certificate " .."during handshake")
     return ngx_exit(444)
   end
 
